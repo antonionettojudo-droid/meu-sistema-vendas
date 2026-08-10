@@ -1,62 +1,20 @@
-const http = require('http');
-const fs = require('fs');
-const PORT = 8080;
+// 1. IMPORTAÇÕES (Ficam no topo do arquivo)
+const express = require('express');
+const path = require('path'); // 🔴 Garanta que esta linha está aqui
 
-http.createServer((req, res) => {
+const app = express();
 
-    // 1. Arquivo de verificação do Google Search Console
-    if (req.url === '/google9456b0c2f9fcbcc0.html') {
-        fs.readFile('./google9456b0c2f9fcbcc0.html', (err, file) => {
-            if (err) {
-                res.writeHead(404, { 'Content-Type': 'text/plain' });
-                res.end('Arquivo de verificacao nao encontrado');
-                return;
-            }
-            res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.end(file);
-        });
-        return;
-    }
+// 2. SUAS OUTRAS CONFIGURAÇÕES E ROTAS JÁ EXISTENTES
+app.get('/', (req, res) => {
+    res.send('Seu site está online!');
+});
 
-    // 2. Mapa do Site (Sitemap)
-    if (req.url === '/sitemap.xml') {
-        fs.readFile('./sitemap.xml', (err, file) => {
-            if (err) {
-                res.writeHead(404, { 'Content-Type': 'text/plain' });
-                res.end('Sitemap nao encontrado');
-                return;
-            }
-            res.writeHead(200, { 'Content-Type': 'text/xml' });
-            res.end(file);
-        });
-        return;
-    }
+// 3. ROTA DO ADS.TXT (Cole aqui, antes do app.listen)
+app.get('/ads.txt', (req, res) => {
+    res.sendFile(path.join(__dirname, 'ads.txt'));
+});
 
-    // 3. ROTA ADICIONADA: Arquivo de Anúncios (ads.txt)
-    if (req.url === '/ads.txt') {
-        fs.readFile('./ads.txt', (err, file) => {
-            if (err) {
-                res.writeHead(404, { 'Content-Type': 'text/plain' });
-                res.end('Arquivo ads.txt nao encontrado');
-                return;
-            }
-            res.writeHead(200, { 'Content-Type': 'text/plain' });
-            res.end(file);
-        });
-        return;
-    }
-
-    // 4. Página principal (Carrega para qualquer outra rota)
-    fs.readFile('./index.html', (err, html) => {
-        if (err) {
-            res.writeHead(404, { 'Content-Type': 'text/plain' });
-            res.end('Arquivo nao encontrado');
-            return;
-        }
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(html);
-    });
-
-}).listen(PORT, () => {
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
+// 4. INICIALIZAÇÃO DO SERVIDOR (Deve ser sempre a última coisa do arquivo)
+app.listen(3000, () => {
+    console.log('Servidor rodando na porta 3000');
 });
