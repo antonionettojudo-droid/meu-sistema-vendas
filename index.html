@@ -24,7 +24,23 @@
     --teal-soft:#E4EFE9;
     --red:#AE4038;
     --red-soft:#F5E4E2;
+    --surface:#FFFFFF;
+    --surface-2:#FDFCF8;
+    --thead-bg:#F3EFDF;
+    --row-hover:#FBF9F1;
     --radius:10px;
+  }
+  [data-theme="dark"]{
+    --paper:#1B2432;
+    --paper-line:#303F55;
+    --ink:#EDEAE0;
+    --muted:#9CA3B5;
+    --teal-soft:rgba(58,151,120,.16);
+    --red-soft:rgba(196,88,78,.18);
+    --surface:#212C3E;
+    --surface-2:#182131;
+    --thead-bg:#283651;
+    --row-hover:rgba(255,255,255,.035);
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -33,6 +49,7 @@
     font-family:'Inter',sans-serif;
     color:var(--ink);
     min-height:100vh;
+    transition:background-color .2s ease, color .2s ease;
   }
   .app{
     display:grid;
@@ -51,14 +68,25 @@
     top:0;
     height:100vh;
   }
+  .brand-row{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:2px;
+  }
   .brand{
     font-family:'Fraunces',serif;
     font-size:15px;
     letter-spacing:.5px;
     text-transform:uppercase;
     color:var(--gold);
-    margin-bottom:2px;
   }
+  .settings-btn{
+    background:transparent; border:1px solid rgba(241,238,223,.2);
+    color:#CFC9B4; width:26px; height:26px; border-radius:7px;
+    font-size:14px; cursor:pointer; line-height:1;
+    display:flex; align-items:center; justify-content:center;
+    transition:background .15s ease, transform .3s ease, color .15s ease;
+  }
+  .settings-btn:hover{background:rgba(212,162,74,.14); color:#F1EEDF; transform:rotate(35deg);}
   .store-name-input{
     background:transparent;
     border:none;
@@ -148,7 +176,7 @@
     margin-bottom:28px;
   }
   .card{
-    background:#fff;
+    background:var(--surface);
     border:1px solid var(--paper-line);
     border-radius:var(--radius);
     padding:18px 20px;
@@ -171,6 +199,23 @@
   .card-value.neg{color:var(--red);}
   .card-sub{font-size:12px;color:var(--muted);margin-top:4px;}
 
+  /* FILTRO DE PERÍODO */
+  .period-bar{
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:10px; margin-bottom:22px;
+  }
+  .period-tabs{display:flex; flex-wrap:wrap; gap:6px;}
+  .period-btn{
+    font-family:'Inter',sans-serif; font-size:12.5px; font-weight:600;
+    padding:7px 13px; border-radius:20px; border:1px solid var(--paper-line);
+    background:var(--surface); color:var(--muted); cursor:pointer;
+    transition:background .15s ease, color .15s ease, border-color .15s ease, transform .12s ease;
+  }
+  .period-btn:hover{border-color:var(--gold); transform:translateY(-1px);}
+  .period-btn.active{background:var(--ink); color:#F5F1E6; border-color:var(--ink);}
+  .period-custom{display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--muted);}
+  .period-custom input{width:auto; padding:6px 9px; font-size:12.5px;}
+
   .dash-row{
     display:grid;
     grid-template-columns:1.3fr 1fr;
@@ -180,7 +225,7 @@
   @media(max-width:900px){ .dash-row{grid-template-columns:1fr;} }
 
   .panel{
-    background:#fff;
+    background:var(--surface);
     border:1px solid var(--paper-line);
     border-radius:var(--radius);
     padding:20px 22px;
@@ -193,6 +238,15 @@
     align-items:center;
     justify-content:space-between;
   }
+  .balance-note{font-size:12px; color:var(--muted); line-height:1.5; margin-bottom:16px;}
+  .balance-main{display:flex; align-items:baseline; gap:18px; flex-wrap:wrap; margin-bottom:6px;}
+  .balance-value{font-family:'JetBrains Mono',monospace; font-size:32px; font-weight:700;}
+  .balance-value.pos{color:var(--teal);}
+  .balance-value.neg{color:var(--red);}
+  .balance-breakdown{display:flex; flex-wrap:wrap; gap:6px 14px; font-size:12px; color:var(--muted);}
+  .balance-breakdown .pos{color:var(--teal); font-weight:600;}
+  .balance-breakdown .neg{color:var(--red); font-weight:600;}
+  .balance-moves{margin-top:14px; border-top:1px dashed var(--paper-line); padding-top:8px;}
   .stamp-wrap{
     display:flex;
     align-items:center;
@@ -272,7 +326,7 @@
   .btn.small{padding:5px 10px; font-size:12px; border-radius:6px;}
 
   .form-card{
-    background:#fff;
+    background:var(--surface);
     border:1px solid var(--paper-line);
     border-radius:var(--radius);
     padding:20px;
@@ -299,19 +353,19 @@
     border-radius:7px;
     font-family:'Inter',sans-serif;
     font-size:14px;
-    background:#FDFCF8;
+    background:var(--surface-2);
   }
   input:focus,select:focus{outline:none;border-color:var(--gold);}
   .form-actions{margin-top:16px;display:flex;gap:10px;}
 
-  table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--paper-line);border-radius:var(--radius);overflow:hidden;}
+  table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--paper-line);border-radius:var(--radius);overflow:hidden;}
   thead th{
     text-align:left;
     font-size:11px;
     text-transform:uppercase;
     letter-spacing:.06em;
     color:var(--muted);
-    background:#F3EFDF;
+    background:var(--thead-bg);
     padding:11px 14px;
     border-bottom:1px solid var(--paper-line);
   }
@@ -321,7 +375,7 @@
     border-bottom:1px solid var(--paper-line);
   }
   tbody tr:last-child td{border-bottom:none;}
-  tbody tr:hover{background:#FBF9F1;}
+  tbody tr:hover{background:var(--row-hover);}
   td.num, th.num{font-family:'JetBrains Mono',monospace;text-align:right;}
   .stock-low{color:var(--red);font-weight:700;}
   .row-actions{display:flex;gap:6px;justify-content:flex-end;}
@@ -354,6 +408,32 @@
   input,select{transition:border-color .15s ease, box-shadow .15s ease;}
   input:focus,select:focus{box-shadow:0 0 0 3px rgba(212,162,74,.18);}
   tr, .mini-row{transition:background-color .15s ease;}
+
+  /* CONFIGURAÇÕES */
+  .settings-section{margin-bottom:22px;}
+  .settings-section:last-child{margin-bottom:0;}
+  .settings-section h4{
+    font-family:'Fraunces',serif; font-size:14px; margin:0 0 10px;
+    color:var(--muted); text-transform:uppercase; letter-spacing:.05em; font-weight:600;
+  }
+  .theme-options{display:flex; gap:8px;}
+  .theme-opt{
+    flex:1; display:flex; flex-direction:column; align-items:center; gap:6px;
+    padding:12px 8px; border:1.5px solid var(--paper-line); border-radius:9px;
+    background:var(--surface-2); cursor:pointer; font-size:12px; color:var(--muted); font-weight:600;
+    transition:border-color .15s ease, background .15s ease, transform .12s ease;
+  }
+  .theme-opt:hover{transform:translateY(-1px);}
+  .theme-opt.active{border-color:var(--gold); color:var(--ink); background:var(--teal-soft);}
+  .theme-opt .swatch{width:34px; height:24px; border-radius:5px; border:1px solid var(--paper-line);}
+  .swatch.light{background:linear-gradient(135deg,#FAF7EE 50%,#fff 50%);}
+  .swatch.dark{background:linear-gradient(135deg,#1B2432 50%,#212C3E 50%);}
+  .swatch.system{background:linear-gradient(135deg,#FAF7EE 50%,#1B2432 50%);}
+  .settings-preview{
+    font-size:12.5px; color:var(--muted); margin-top:12px;
+    background:var(--surface-2); border:1px dashed var(--paper-line);
+    border-radius:8px; padding:10px 12px;
+  }
 
   /* CARRINHO DE VENDA (abre como painel lateral) */
   @keyframes slideInPanel{ from{transform:translateX(100%);} to{transform:translateX(0);} }
@@ -423,7 +503,7 @@
     gap:16px;
   }
   .listing-card{
-    background:#fff; border:1px solid var(--paper-line); border-radius:var(--radius);
+    background:var(--surface); border:1px solid var(--paper-line); border-radius:var(--radius);
     padding:18px 20px; animation:fadeInUp .35s cubic-bezier(.2,.7,.3,1) both;
     transition:transform .18s ease, box-shadow .18s ease;
   }
@@ -467,12 +547,16 @@
 <body>
 <div class="app">
   <nav class="sidebar">
-    <div class="brand">Livro Caixa</div>
+    <div class="brand-row">
+      <div class="brand">Livro Caixa</div>
+      <button class="settings-btn" id="btnSettings" title="Configurações" aria-label="Configurações">⚙</button>
+    </div>
     <input id="storeNameInput" class="store-name-input" value="Minha Loja" />
     <button class="nav-btn active" data-tab="dashboard"><span class="num">01</span> Painel</button>
     <button class="nav-btn" data-tab="produtos"><span class="num">02</span> Produtos</button>
     <button class="nav-btn" data-tab="vendas"><span class="num">03</span> Vendas</button>
-    <button class="nav-btn" data-tab="vitrine"><span class="num">04</span> Vitrine</button>
+    <button class="nav-btn" data-tab="despesas"><span class="num">04</span> Despesas</button>
+    <button class="nav-btn" data-tab="vitrine"><span class="num">05</span> Vitrine</button>
     <div class="sidebar-foot">
       <div class="save-status" id="saveStatus">
         <span class="save-dot" id="saveDot"></span>
@@ -500,6 +584,7 @@
     <section id="tab-dashboard"></section>
     <section id="tab-produtos" style="display:none;"></section>
     <section id="tab-vendas" style="display:none;"></section>
+    <section id="tab-despesas" style="display:none;"></section>
     <section id="tab-vitrine" style="display:none;"></section>
   </main>
 
@@ -539,6 +624,49 @@
     </div>
   </div>
 
+  <div class="sale-overlay" id="settingsOverlay">
+    <div class="sale-panel" id="settingsPanel">
+      <div class="sale-panel-head">
+        <h3>Configurações</h3>
+        <button class="btn secondary small" id="settings-close">Fechar</button>
+      </div>
+
+      <div class="settings-section">
+        <h4>Loja e usuário</h4>
+        <div class="form-grid">
+          <div><label>Nome da loja</label><input id="set-store-name" placeholder="Ex: Boutique da Ana"></div>
+          <div><label>Seu nome (usuário)</label><input id="set-user-name" placeholder="Ex: Ana"></div>
+        </div>
+        <div class="settings-preview" id="greetingPreview">Bem-vindo(a), Ana! 👋</div>
+      </div>
+
+      <div class="settings-section">
+        <h4>Fuso horário</h4>
+        <select id="set-timezone">
+          <option value="America/Sao_Paulo">Brasília / São Paulo (UTC-3)</option>
+          <option value="America/Manaus">Manaus / Cuiabá (UTC-4)</option>
+          <option value="America/Rio_Branco">Rio Branco / Acre (UTC-5)</option>
+          <option value="America/Noronha">Fernando de Noronha (UTC-2)</option>
+          <option value="America/Belem">Belém (UTC-3)</option>
+        </select>
+        <div class="settings-preview" id="timezonePreview">Agora: --</div>
+      </div>
+
+      <div class="settings-section">
+        <h4>Tema</h4>
+        <div class="theme-options">
+          <div class="theme-opt" data-theme-opt="claro"><span class="swatch light"></span>Claro</div>
+          <div class="theme-opt" data-theme-opt="escuro"><span class="swatch dark"></span>Escuro</div>
+          <div class="theme-opt" data-theme-opt="sistema"><span class="swatch system"></span>Sistema</div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn" id="settings-save">Salvar configurações</button>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -549,6 +677,15 @@ let activeTab = 'dashboard';
 let hasUnsavedChanges = false;
 let communityListings = [];
 let myListingIds = [];
+let expenses = [];
+let purchases = [];
+let balanceAdjustments = [];
+let dashPeriod = 'tudo';
+let dashFrom = new Date().toISOString().slice(0,10);
+let dashTo = new Date().toISOString().slice(0,10);
+let userName = '';
+let timezone = 'America/Sao_Paulo';
+let theme = 'sistema';
 
 function markDirty(){
   hasUnsavedChanges = true;
@@ -580,13 +717,15 @@ const fmtNum = n => (n||0).toLocaleString('pt-BR');
 const todayISO = () => new Date().toISOString().slice(0,10);
 const uid = () => Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 
-document.getElementById('todayLabel').textContent = new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
-
 async function saveProducts(){ try{ await window.storage.set('products', JSON.stringify(products)); markDirty(); }catch(e){ console.error(e); } }
 async function saveSales(){ try{ await window.storage.set('sales', JSON.stringify(sales)); markDirty(); }catch(e){ console.error(e); } }
 async function saveStoreName(){ try{ await window.storage.set('store_name', storeName); markDirty(); }catch(e){ console.error(e); } }
 async function saveCommunityListings(){ try{ await window.storage.set('community_listings', JSON.stringify(communityListings), true); }catch(e){ console.error(e); } }
 async function saveMyListingIds(){ try{ await window.storage.set('my_listing_ids', JSON.stringify(myListingIds)); }catch(e){ console.error(e); } }
+async function saveExpenses(){ try{ await window.storage.set('expenses', JSON.stringify(expenses)); markDirty(); }catch(e){ console.error(e); } }
+async function savePurchases(){ try{ await window.storage.set('purchases', JSON.stringify(purchases)); markDirty(); }catch(e){ console.error(e); } }
+async function saveBalanceAdjustments(){ try{ await window.storage.set('balance_adjustments', JSON.stringify(balanceAdjustments)); markDirty(); }catch(e){ console.error(e); } }
+async function saveAppSettings(){ try{ await window.storage.set('app_settings', JSON.stringify({userName, timezone, theme})); }catch(e){ console.error(e); } }
 
 function normalizeSales(raw){
   return (raw||[]).map(s=>{
@@ -609,15 +748,113 @@ async function loadAll(){
   try{ const r = await window.storage.get('store_name'); storeName = r ? r.value : 'Minha Loja'; }catch(e){ storeName = 'Minha Loja'; }
   try{ const r = await window.storage.get('community_listings', true); communityListings = r ? JSON.parse(r.value) : []; }catch(e){ communityListings = []; }
   try{ const r = await window.storage.get('my_listing_ids'); myListingIds = r ? JSON.parse(r.value) : []; }catch(e){ myListingIds = []; }
+  try{ const r = await window.storage.get('expenses'); expenses = r ? JSON.parse(r.value) : []; }catch(e){ expenses = []; }
+  try{ const r = await window.storage.get('purchases'); purchases = r ? JSON.parse(r.value) : []; }catch(e){ purchases = []; }
+  try{ const r = await window.storage.get('balance_adjustments'); balanceAdjustments = r ? JSON.parse(r.value) : []; }catch(e){ balanceAdjustments = []; }
+  try{
+    const r = await window.storage.get('app_settings');
+    const s = r ? JSON.parse(r.value) : {};
+    userName = s.userName || '';
+    timezone = s.timezone || 'America/Sao_Paulo';
+    theme = s.theme || 'sistema';
+  }catch(e){ userName=''; timezone='America/Sao_Paulo'; theme='sistema'; }
   document.getElementById('storeNameInput').value = storeName;
   hasUnsavedChanges = false;
   updateSaveIndicator();
+  applyTheme();
+  updateClock();
+  updatePageHeader();
   renderAll();
 }
 
 document.getElementById('storeNameInput').addEventListener('change', e=>{
   storeName = e.target.value.trim() || 'Minha Loja';
   saveStoreName();
+});
+
+/* ---------- CONFIGURAÇÕES ---------- */
+let systemThemeQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+
+function resolvedIsDark(){
+  if(theme==='escuro') return true;
+  if(theme==='claro') return false;
+  return systemThemeQuery ? systemThemeQuery.matches : false;
+}
+
+function applyTheme(){
+  document.documentElement.setAttribute('data-theme', resolvedIsDark() ? 'dark' : 'light');
+}
+
+if(systemThemeQuery){
+  systemThemeQuery.addEventListener('change', ()=>{ if(theme==='sistema') applyTheme(); });
+}
+
+function updateClock(){
+  const now = new Date();
+  try{
+    const dateStr = now.toLocaleDateString('pt-BR', {weekday:'long', day:'2-digit', month:'long', year:'numeric', timeZone:timezone});
+    const timeStr = now.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit', timeZone:timezone});
+    const label = document.getElementById('todayLabel');
+    if(label) label.textContent = `${dateStr} · ${timeStr}`;
+    const prev = document.getElementById('timezonePreview');
+    if(prev) prev.textContent = `Agora: ${dateStr}, ${timeStr}`;
+  }catch(e){ /* fuso inválido, ignora */ }
+}
+setInterval(updateClock, 30000);
+
+function openSettingsOverlay(){
+  document.getElementById('set-store-name').value = storeName;
+  document.getElementById('set-user-name').value = userName;
+  document.getElementById('set-timezone').value = timezone;
+  document.getElementById('greetingPreview').textContent = userName ? `Bem-vindo(a), ${userName}! 👋` : 'Digite seu nome para ver a saudação personalizada.';
+  document.querySelectorAll('.theme-opt').forEach(el=> el.classList.toggle('active', el.dataset.themeOpt===theme));
+  updateClock();
+  document.getElementById('settingsOverlay').style.display = 'flex';
+}
+function closeSettingsOverlay(){
+  document.getElementById('settingsOverlay').style.display = 'none';
+}
+
+document.getElementById('btnSettings').addEventListener('click', openSettingsOverlay);
+document.getElementById('settings-close').addEventListener('click', closeSettingsOverlay);
+document.getElementById('settingsOverlay').addEventListener('click', (e)=>{
+  if(e.target.id==='settingsOverlay') closeSettingsOverlay();
+});
+
+document.getElementById('set-store-name').addEventListener('change', e=>{
+  storeName = e.target.value.trim() || 'Minha Loja';
+  document.getElementById('storeNameInput').value = storeName;
+  saveStoreName();
+});
+
+document.getElementById('set-user-name').addEventListener('input', e=>{
+  const val = e.target.value.trim();
+  document.getElementById('greetingPreview').textContent = val ? `Bem-vindo(a), ${val}! 👋` : 'Digite seu nome para ver a saudação personalizada.';
+});
+document.getElementById('set-user-name').addEventListener('change', async e=>{
+  userName = e.target.value.trim();
+  await saveAppSettings();
+  updatePageHeader();
+});
+
+document.getElementById('set-timezone').addEventListener('change', async e=>{
+  timezone = e.target.value;
+  await saveAppSettings();
+  updateClock();
+});
+
+document.querySelectorAll('.theme-opt').forEach(el=>{
+  el.addEventListener('click', async ()=>{
+    theme = el.dataset.themeOpt;
+    document.querySelectorAll('.theme-opt').forEach(o=>o.classList.toggle('active', o===el));
+    applyTheme();
+    await saveAppSettings();
+  });
+});
+
+document.getElementById('settings-save').addEventListener('click', async ()=>{
+  await saveAppSettings();
+  closeSettingsOverlay();
 });
 
 function animateIn(el){
@@ -627,7 +864,7 @@ function animateIn(el){
 }
 
 document.getElementById('btnExport').addEventListener('click', ()=>{
-  const data = { storeName, products, sales, exportedAt: new Date().toISOString() };
+  const data = { storeName, products, sales, expenses, purchases, balanceAdjustments, exportedAt: new Date().toISOString() };
   const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -658,10 +895,16 @@ document.getElementById('fileImport').addEventListener('change', async (e)=>{
     if(!confirm('Importar este arquivo vai substituir os dados atuais neste app. Deseja continuar?')) return;
     products = data.products;
     sales = normalizeSales(data.sales);
+    expenses = Array.isArray(data.expenses) ? data.expenses : [];
+    purchases = Array.isArray(data.purchases) ? data.purchases : [];
+    balanceAdjustments = Array.isArray(data.balanceAdjustments) ? data.balanceAdjustments : [];
     storeName = data.storeName || storeName;
     document.getElementById('storeNameInput').value = storeName;
     await saveProducts();
     await saveSales();
+    await saveExpenses();
+    await savePurchases();
+    await saveBalanceAdjustments();
     await saveStoreName();
     hasUnsavedChanges = false;
     updateSaveIndicator();
@@ -672,6 +915,15 @@ document.getElementById('fileImport').addEventListener('change', async (e)=>{
   e.target.value = '';
 });
 
+const TAB_TITLES = {dashboard:['Painel','Visão geral de vendas, custos e lucro'], produtos:['Produtos','Cadastro de itens, custo, preço e estoque'], vendas:['Vendas','Registre cada venda e acompanhe o lucro gerado'], despesas:['Despesas','Aluguel, contas e outros custos fixos ou variáveis'], vitrine:['Vitrine','Anúncios de lojas e estabelecimentos que usam este sistema']};
+
+function updatePageHeader(){
+  const [title, sub] = TAB_TITLES[activeTab];
+  document.getElementById('pageTitle').textContent = title;
+  const greeting = (activeTab==='dashboard' && userName) ? `Bem-vindo(a), ${userName}! ` : '';
+  document.getElementById('pageSub').textContent = greeting + sub;
+}
+
 document.querySelectorAll('.nav-btn').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -680,42 +932,123 @@ document.querySelectorAll('.nav-btn').forEach(btn=>{
     document.getElementById('tab-dashboard').style.display = activeTab==='dashboard' ? 'block':'none';
     document.getElementById('tab-produtos').style.display = activeTab==='produtos' ? 'block':'none';
     document.getElementById('tab-vendas').style.display = activeTab==='vendas' ? 'block':'none';
+    document.getElementById('tab-despesas').style.display = activeTab==='despesas' ? 'block':'none';
     document.getElementById('tab-vitrine').style.display = activeTab==='vitrine' ? 'block':'none';
-    const titles = {dashboard:['Painel','Visão geral de vendas, custos e lucro'], produtos:['Produtos','Cadastro de itens, custo, preço e estoque'], vendas:['Vendas','Registre cada venda e acompanhe o lucro gerado'], vitrine:['Vitrine','Anúncios de lojas e estabelecimentos que usam este sistema']};
-    document.getElementById('pageTitle').textContent = titles[activeTab][0];
-    document.getElementById('pageSub').textContent = titles[activeTab][1];
+    updatePageHeader();
     renderAll();
   });
 });
 
-function metrics(){
+function metrics(list){
   let revenue=0, cost=0;
-  sales.forEach(s=>{ revenue += s.total; cost += s.cost; });
+  (list||sales).forEach(s=>{ revenue += s.total; cost += s.cost; });
   const profit = revenue - cost;
   const margin = revenue>0 ? (profit/revenue*100) : 0;
-  return {revenue, cost, profit, margin, count:sales.length};
+  return {revenue, cost, profit, margin, count:(list||sales).length};
 }
 
 function renderAll(){
   if(activeTab==='dashboard') renderDashboard();
   if(activeTab==='produtos') renderProdutos();
   if(activeTab==='vendas') renderVendas();
+  if(activeTab==='despesas') renderDespesas();
   if(activeTab==='vitrine') renderVitrine();
 }
 
 /* ---------- DASHBOARD ---------- */
+function periodRange(period){
+  const todayStr = todayISO();
+  if(period==='hoje') return {from: todayStr, to: todayStr};
+  if(period==='7dias'){
+    const d = new Date(); d.setDate(d.getDate()-6);
+    return {from: d.toISOString().slice(0,10), to: todayStr};
+  }
+  if(period==='mes'){
+    const now = new Date();
+    const first = new Date(now.getFullYear(), now.getMonth(), 1);
+    return {from: first.toISOString().slice(0,10), to: todayStr};
+  }
+  if(period==='personalizado') return {from: dashFrom || '0000-01-01', to: dashTo || '9999-12-31'};
+  return {from:'0000-01-01', to:'9999-12-31'};
+}
+function inRange(dateStr, range){ return dateStr >= range.from && dateStr <= range.to; }
+
+const PERIOD_LABELS = {hoje:'Hoje', '7dias':'Últimos 7 dias', mes:'Este mês', tudo:'Tudo', personalizado:'Personalizado'};
+
+function computeSaldo(){
+  const totalVendas = sales.reduce((a,s)=>a+s.total,0);
+  const totalCompras = purchases.reduce((a,p)=>a+p.total,0);
+  const totalDespesas = expenses.reduce((a,e)=>a+e.amount,0);
+  const totalEntradasManuais = balanceAdjustments.filter(a=>a.type==='entrada').reduce((a,x)=>a+x.amount,0);
+  const totalSaidasManuais = balanceAdjustments.filter(a=>a.type==='saida').reduce((a,x)=>a+x.amount,0);
+  const saldo = totalVendas - totalCompras - totalDespesas + totalEntradasManuais - totalSaidasManuais;
+  return {saldo, totalVendas, totalCompras, totalDespesas, totalEntradasManuais, totalSaidasManuais};
+}
+
 function renderDashboard(){
   const el = document.getElementById('tab-dashboard');
-  const m = metrics();
+  const range = periodRange(dashPeriod);
+  const periodSales = sales.filter(s=>inRange(s.date, range));
+  const periodExpenses = expenses.filter(ex=>inRange(ex.date, range));
+  const m = metrics(periodSales);
+  const expensesTotal = periodExpenses.reduce((a,ex)=>a+ex.amount,0);
+  const netProfit = m.profit - expensesTotal;
   const lowStock = products.filter(p=>p.stock <= 5);
 
   const bestSellers = {};
-  sales.forEach(s=> s.items.forEach(it=>{ bestSellers[it.productName] = (bestSellers[it.productName]||0)+it.qty; }));
+  periodSales.forEach(s=> s.items.forEach(it=>{ bestSellers[it.productName] = (bestSellers[it.productName]||0)+it.qty; }));
   const bestList = Object.entries(bestSellers).sort((a,b)=>b[1]-a[1]).slice(0,5);
 
-  const recent = [...sales].sort((a,b)=> b.date.localeCompare(a.date) || b.id.localeCompare(a.id)).slice(0,6);
+  const recent = [...periodSales].sort((a,b)=> b.date.localeCompare(a.date) || b.id.localeCompare(a.id)).slice(0,6);
+  const bal = computeSaldo();
+  const recentMoves = [...balanceAdjustments].sort((a,b)=> b.date.localeCompare(a.date)).slice(0,5);
 
   el.innerHTML = `
+    <div class="period-bar">
+      <div class="period-tabs">
+        ${['hoje','7dias','mes','tudo','personalizado'].map(p=>`
+          <button class="period-btn ${dashPeriod===p?'active':''}" data-period="${p}">${PERIOD_LABELS[p]}</button>
+        `).join('')}
+      </div>
+      ${dashPeriod==='personalizado' ? `
+        <div class="period-custom">
+          <input type="date" id="dashFromInput" value="${dashFrom}">
+          <span>até</span>
+          <input type="date" id="dashToInput" value="${dashTo}">
+        </div>` : ''}
+    </div>
+
+    <div class="panel balance-panel" style="margin-bottom:20px;">
+      <h3>
+        Saldo da loja
+        <button class="btn secondary small" id="btnNewMovement">+ Movimentação</button>
+      </h3>
+      <div class="balance-note">Saldo total em caixa (não muda com o filtro de período acima): entra com vendas e ajustes de entrada, sai com compra de estoque, despesas e ajustes de saída.</div>
+      <div class="balance-main">
+        <div class="balance-value ${bal.saldo>=0?'pos':'neg'}">${fmt(bal.saldo)}</div>
+        <div class="balance-breakdown">
+          <span class="pos">+ ${fmt(bal.totalVendas)} vendas</span>
+          <span class="neg">− ${fmt(bal.totalCompras)} compras de estoque</span>
+          <span class="neg">− ${fmt(bal.totalDespesas)} despesas</span>
+          ${bal.totalEntradasManuais>0 ? `<span class="pos">+ ${fmt(bal.totalEntradasManuais)} ajustes</span>` : ''}
+          ${bal.totalSaidasManuais>0 ? `<span class="neg">− ${fmt(bal.totalSaidasManuais)} ajustes</span>` : ''}
+        </div>
+      </div>
+      <div id="movementFormWrap"></div>
+      ${recentMoves.length ? `
+        <div class="balance-moves">
+          ${recentMoves.map((mv,i)=>`
+            <div class="mini-row" style="animation-delay:${i*30}ms">
+              <span>${mv.description} <span class="qty">${mv.date.split('-').reverse().join('/')}</span></span>
+              <span class="qty" style="display:flex;align-items:center;gap:8px;">
+                <span style="color:${mv.type==='entrada'?'var(--teal)':'var(--red)'}">${mv.type==='entrada'?'+':'−'} ${fmt(mv.amount)}</span>
+                <button class="btn danger small" data-delmove="${mv.id}">Excluir</button>
+              </span>
+            </div>
+          `).join('')}
+        </div>` : ''}
+    </div>
+
     <div class="cards">
       <div class="card">
         <div class="card-label">Faturamento</div>
@@ -728,9 +1061,19 @@ function renderDashboard(){
         <div class="card-sub">soma do custo dos produtos vendidos</div>
       </div>
       <div class="card">
-        <div class="card-label">Lucro</div>
+        <div class="card-label">Lucro bruto</div>
         <div class="card-value ${m.profit>=0?'pos':'neg'}">${fmt(m.profit)}</div>
         <div class="card-sub">margem de ${m.margin.toFixed(1)}%</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Despesas do período</div>
+        <div class="card-value">${fmt(expensesTotal)}</div>
+        <div class="card-sub">${periodExpenses.length} despesa${periodExpenses.length===1?'':'s'} no período</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Lucro líquido</div>
+        <div class="card-value ${netProfit>=0?'pos':'neg'}">${fmt(netProfit)}</div>
+        <div class="card-sub">lucro bruto − despesas</div>
       </div>
       <div class="card">
         <div class="card-label">Produtos cadastrados</div>
@@ -749,16 +1092,16 @@ function renderDashboard(){
             <span>${label}</span>
             <span class="qty">${fmt(s.total)} · ${s.date.split('-').reverse().join('/')}</span>
           </div>`;
-        }).join('') : '<div class="empty">Nenhuma venda registrada ainda.</div>'}
+        }).join('') : '<div class="empty">Nenhuma venda no período selecionado.</div>'}
       </div>
 
       <div class="panel">
-        <h3>Resultado</h3>
+        <h3>Resultado líquido</h3>
         <div class="stamp-wrap">
-          <div class="stamp anim-pop ${m.profit>=0?'':'neg'}">
-            <div class="s-label">${m.profit>=0 ? 'Lucro' : 'Prejuízo'}</div>
-            <div class="s-margin">${m.margin.toFixed(1)}%</div>
-            <div class="s-note">margem sobre vendas</div>
+          <div class="stamp anim-pop ${netProfit>=0?'':'neg'}">
+            <div class="s-label">${netProfit>=0 ? 'Lucro' : 'Prejuízo'}</div>
+            <div class="s-margin">${fmt(netProfit)}</div>
+            <div class="s-note">${PERIOD_LABELS[dashPeriod].toLowerCase()}</div>
           </div>
         </div>
       </div>
@@ -769,7 +1112,7 @@ function renderDashboard(){
         <h3>Mais vendidos</h3>
         ${bestList.length ? bestList.map(([name,qty],i)=>`
           <div class="mini-row" style="animation-delay:${i*35}ms"><span>${name}</span><span class="qty">${qty} un.</span></div>
-        `).join('') : '<div class="empty">Sem dados de vendas ainda.</div>'}
+        `).join('') : '<div class="empty">Sem dados de vendas no período.</div>'}
       </div>
       <div class="panel">
         <h3>Estoque baixo <span style="font-size:11px;color:var(--muted);font-family:'Inter',sans-serif;">≤ 5 un.</span></h3>
@@ -780,6 +1123,60 @@ function renderDashboard(){
     </div>
   `;
   animateIn(el);
+
+  el.querySelectorAll('.period-btn').forEach(b=>b.addEventListener('click', ()=>{
+    dashPeriod = b.dataset.period;
+    renderDashboard();
+  }));
+  document.getElementById('dashFromInput')?.addEventListener('change', e=>{ dashFrom = e.target.value; renderDashboard(); });
+  document.getElementById('dashToInput')?.addEventListener('change', e=>{ dashTo = e.target.value; renderDashboard(); });
+
+  document.getElementById('btnNewMovement').addEventListener('click', showMovementForm);
+  el.querySelectorAll('[data-delmove]').forEach(b=>b.addEventListener('click', async ()=>{
+    const mv = balanceAdjustments.find(x=>x.id===b.dataset.delmove);
+    if(!mv) return;
+    if(confirm(`Excluir a movimentação "${mv.description}"?`)){
+      balanceAdjustments = balanceAdjustments.filter(x=>x.id!==mv.id);
+      await saveBalanceAdjustments();
+      renderDashboard();
+    }
+  }));
+}
+
+function showMovementForm(){
+  const wrap = document.getElementById('movementFormWrap');
+  wrap.innerHTML = `
+    <div class="form-card anim-in" style="margin-top:14px;margin-bottom:0;">
+      <div class="form-grid">
+        <div>
+          <label>Tipo</label>
+          <select id="mv-type">
+            <option value="entrada">Entrada (ganho, aporte...)</option>
+            <option value="saida">Saída (retirada, gasto avulso...)</option>
+          </select>
+        </div>
+        <div><label>Descrição</label><input id="mv-desc" placeholder="Ex: Aporte de capital, retirada de sócio..."></div>
+        <div><label>Valor (R$)</label><input id="mv-amount" type="number" step="0.01" min="0" placeholder="0,00"></div>
+        <div><label>Data</label><input id="mv-date" type="date" value="${todayISO()}"></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn" id="mv-save">Registrar movimentação</button>
+        <button class="btn secondary" id="mv-cancel">Cancelar</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('mv-cancel').addEventListener('click', ()=>{ wrap.innerHTML=''; });
+  document.getElementById('mv-save').addEventListener('click', async ()=>{
+    const type = document.getElementById('mv-type').value;
+    const description = document.getElementById('mv-desc').value.trim();
+    const amount = parseFloat(document.getElementById('mv-amount').value)||0;
+    const date = document.getElementById('mv-date').value || todayISO();
+    if(!description){ alert('Descreva a movimentação.'); return; }
+    if(amount<=0){ alert('Informe um valor válido.'); return; }
+    balanceAdjustments.push({id:uid(), type, description, amount, date});
+    await saveBalanceAdjustments();
+    renderDashboard();
+  });
 }
 
 /* ---------- PRODUTOS ---------- */
@@ -857,7 +1254,9 @@ function showRestockForm(){
           </select>
         </div>
         <div><label>Estoque adicionado</label><input id="r-qty" type="number" min="1" step="1" placeholder="Ex: 20"></div>
+        <div><label>Data da compra</label><input id="r-date" type="date" value="${todayISO()}"></div>
       </div>
+      <div class="hint">O custo desta reposição é descontado do saldo da loja, no Painel.</div>
       <div class="form-actions">
         <button class="btn" id="r-save">Adicionar ao estoque</button>
         <button class="btn secondary" id="r-cancel">Cancelar</button>
@@ -868,12 +1267,15 @@ function showRestockForm(){
   document.getElementById('r-save').addEventListener('click', async ()=>{
     const pid = document.getElementById('r-product').value;
     const qty = parseInt(document.getElementById('r-qty').value)||0;
+    const date = document.getElementById('r-date').value || todayISO();
     if(!pid){ alert('Selecione um produto.'); return; }
     if(qty<=0){ alert('Informe uma quantidade válida.'); return; }
     const prod = products.find(p=>p.id===pid);
     if(!prod){ alert('Produto não encontrado.'); return; }
     prod.stock += qty;
+    purchases.push({id:uid(), productId:prod.id, productName:prod.name, qty, unitCost:prod.cost, total:qty*prod.cost, date, kind:'reposicao'});
     await saveProducts();
+    await savePurchases();
     wrap.innerHTML = '';
     renderProdutos();
   });
@@ -891,6 +1293,7 @@ function showProductForm(){
         <div><label>Preço de venda (R$)</label><input id="f-price" type="number" step="0.01" min="0" value="${p?p.price:''}" placeholder="0,00"></div>
         <div><label>Estoque (un.)</label><input id="f-stock" type="number" step="1" min="0" value="${p?p.stock:''}" placeholder="0"></div>
       </div>
+      <div class="hint">${p ? 'Se você aumentar o estoque aqui, a diferença é descontada do saldo da loja pelo valor de custo.' : 'Se o estoque inicial for maior que 0, o custo dele já é descontado do saldo da loja.'}</div>
       <div class="form-actions">
         <button class="btn" id="f-save">${p?'Salvar alterações':'Cadastrar produto'}</button>
         <button class="btn secondary" id="f-cancel">Cancelar</button>
@@ -917,9 +1320,20 @@ function showProductForm(){
     const stock = parseInt(document.getElementById('f-stock').value)||0;
     if(!name){ alert('Informe o nome do produto.'); return; }
     if(p){
+      const oldStock = p.stock;
       p.name=name; p.category=category; p.cost=cost; p.price=price; p.stock=stock;
+      const added = stock - oldStock;
+      if(added>0 && cost>0){
+        purchases.push({id:uid(), productId:p.id, productName:name, qty:added, unitCost:cost, total:added*cost, date:todayISO(), kind:'ajuste'});
+        await savePurchases();
+      }
     } else {
-      products.push({id:uid(), name, category, cost, price, stock});
+      const newId = uid();
+      products.push({id:newId, name, category, cost, price, stock});
+      if(stock>0 && cost>0){
+        purchases.push({id:uid(), productId:newId, productName:name, qty:stock, unitCost:cost, total:stock*cost, date:todayISO(), kind:'cadastro'});
+        await savePurchases();
+      }
     }
     await saveProducts();
     editingProductId = null;
@@ -1094,6 +1508,112 @@ document.getElementById('cart-finish').addEventListener('click', async ()=>{
   if(activeTab==='dashboard') renderDashboard();
 });
 
+/* ---------- DESPESAS ---------- */
+let editingExpenseId = null;
+const EXPENSE_CATEGORIES = ['Aluguel','Energia','Água','Internet/Telefone','Salários','Fornecedores','Impostos','Manutenção','Outros'];
+
+function renderDespesas(){
+  const el = document.getElementById('tab-despesas');
+  const sorted = [...expenses].sort((a,b)=> b.date.localeCompare(a.date));
+  const total = expenses.reduce((a,e)=>a+e.amount,0);
+
+  el.innerHTML = `
+    <div class="toolbar">
+      <div class="hint" style="margin:0;">${expenses.length} despesa${expenses.length===1?'':'s'} registrada${expenses.length===1?'':'s'} · total geral ${fmt(total)}</div>
+      <button class="btn" id="btnNewExpense">+ Nova despesa</button>
+    </div>
+    <div id="expenseFormWrap"></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th class="num">Valor</th><th></th></tr></thead>
+        <tbody>
+          ${sorted.length ? sorted.map((e,i)=>`
+            <tr style="animation-delay:${i*30}ms">
+              <td>${e.date.split('-').reverse().join('/')}</td>
+              <td>${e.description}</td>
+              <td>${e.category || '—'}</td>
+              <td class="num">${fmt(e.amount)}</td>
+              <td><div class="row-actions">
+                <button class="btn secondary small" data-editexp="${e.id}">Editar</button>
+                <button class="btn danger small" data-delexp="${e.id}">Excluir</button>
+              </div></td>
+            </tr>
+          `).join('') : `<tr><td colspan="5" class="empty">Nenhuma despesa registrada ainda.</td></tr>`}
+        </tbody>
+      </table>
+    </div>
+  `;
+  animateIn(el);
+
+  document.getElementById('btnNewExpense').addEventListener('click', ()=>{ editingExpenseId=null; showExpenseForm(); });
+  el.querySelectorAll('[data-editexp]').forEach(b=>b.addEventListener('click', ()=>{ editingExpenseId=b.dataset.editexp; showExpenseForm(); }));
+  el.querySelectorAll('[data-delexp]').forEach(b=>b.addEventListener('click', ()=>{
+    const exp = expenses.find(x=>x.id===b.dataset.delexp);
+    if(!exp) return;
+    if(confirm(`Excluir a despesa "${exp.description}"?`)){
+      const row = b.closest('tr');
+      if(row) row.classList.add('removing');
+      setTimeout(async ()=>{
+        expenses = expenses.filter(x=>x.id!==exp.id);
+        await saveExpenses();
+        renderDespesas();
+      }, 200);
+    }
+  }));
+}
+
+function showExpenseForm(){
+  const wrap = document.getElementById('expenseFormWrap');
+  const ex = editingExpenseId ? expenses.find(x=>x.id===editingExpenseId) : null;
+  wrap.innerHTML = `
+    <div class="form-card anim-in">
+      <div class="form-grid">
+        <div><label>Descrição</label><input id="e-desc" value="${ex?ex.description:''}" placeholder="Ex: Aluguel de agosto"></div>
+        <div><label>Categoria</label>
+          <select id="e-cat">
+            <option value="">Selecione...</option>
+            ${EXPENSE_CATEGORIES.map(c=>`<option value="${c}" ${ex&&ex.category===c?'selected':''}>${c}</option>`).join('')}
+          </select>
+        </div>
+        <div><label>Valor (R$)</label><input id="e-amount" type="number" step="0.01" min="0" value="${ex?ex.amount:''}" placeholder="0,00"></div>
+        <div><label>Data</label><input id="e-date" type="date" value="${ex?ex.date:todayISO()}"></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn" id="e-save">${ex?'Salvar alterações':'Registrar despesa'}</button>
+        <button class="btn secondary" id="e-cancel">Cancelar</button>
+        ${ex ? '<button class="btn danger" id="e-delete" style="margin-left:auto;">Excluir despesa</button>' : ''}
+      </div>
+    </div>
+  `;
+  document.getElementById('e-cancel').addEventListener('click', ()=>{ editingExpenseId=null; wrap.innerHTML=''; });
+  if(ex){
+    document.getElementById('e-delete').addEventListener('click', async ()=>{
+      if(confirm(`Excluir a despesa "${ex.description}"?`)){
+        expenses = expenses.filter(x=>x.id!==ex.id);
+        await saveExpenses();
+        editingExpenseId = null;
+        renderDespesas();
+      }
+    });
+  }
+  document.getElementById('e-save').addEventListener('click', async ()=>{
+    const description = document.getElementById('e-desc').value.trim();
+    const category = document.getElementById('e-cat').value;
+    const amount = parseFloat(document.getElementById('e-amount').value)||0;
+    const date = document.getElementById('e-date').value || todayISO();
+    if(!description){ alert('Descreva a despesa.'); return; }
+    if(amount<=0){ alert('Informe um valor válido.'); return; }
+    if(ex){
+      ex.description=description; ex.category=category; ex.amount=amount; ex.date=date;
+    } else {
+      expenses.push({id:uid(), description, category, amount, date});
+    }
+    await saveExpenses();
+    editingExpenseId = null;
+    renderDespesas();
+  });
+}
+
 /* ---------- VITRINE (anúncios de lojas que usam o sistema) ---------- */
 function renderVitrine(){
   const el = document.getElementById('tab-vitrine');
@@ -1152,7 +1672,7 @@ function showListingForm(){
       </div>
       <div style="margin-top:14px;">
         <label>Anúncio</label>
-        <textarea id="l-ad" rows="3" placeholder="Conte em poucas linhas o que sua loja vende ou uma promoção atual." style="width:100%;padding:9px 10px;border:1px solid var(--paper-line);border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;background:#FDFCF8;resize:vertical;"></textarea>
+        <textarea id="l-ad" rows="3" placeholder="Conte em poucas linhas o que sua loja vende ou uma promoção atual." style="width:100%;padding:9px 10px;border:1px solid var(--paper-line);border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;background:var(--surface-2);resize:vertical;"></textarea>
       </div>
       <div class="hint">Este anúncio ficará público para todas as lojas que usam este sistema.</div>
       <div class="form-actions">
